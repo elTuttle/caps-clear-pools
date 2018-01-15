@@ -1,0 +1,100 @@
+.App {
+  text-align: center;
+
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.navbar-div {
+  background-image: url("./bg.png");
+  border: 1px solid white;
+  border-radius: 6px;
+}
+
+.about-div {
+  background-image: url("./bg.png");
+  border: 1px solid white;
+  border-radius: 6px;
+}
+
+.navbar-text {
+  margin-top: 27px;
+  font-family: Trebuchet MS;
+  font-size: 2em;
+  color: white;
+}
+
+.navbar-text:hover {
+  margin-top: 23px;
+  font-family: Trebuchet MS;
+  font-size: 2.1em;
+  color: #cecece;
+  cursor: pointer;
+  border: 1px solid white;
+  border-radius: 6px;
+}
+
+.navbar-logo {
+  margin-top: 20px;
+  font-family: Trebuchet MS;
+  font-size: 2.5em;
+  color: white;
+}
+
+.homepage-motto {
+  color: white;
+
+  font-family: Trebuchet MS;
+  font-size: 3em;
+}
+
+.homepage-motto-div {
+  background-image: url("./bg.png");
+  border: 1px solid white;
+  border-radius: 6px;
+}
+
+.image-carousel {
+  border: 1px solid white;
+  border-radius: 6px;
+  background-color: black;
+}
+
+.about-header {
+  margin-top: 27px;
+  font-family: Trebuchet MS;
+  font-size: 3em;
+  color: white;
+  text-align: left;
+}
+
+.about-text {
+  margin-top: 27px;
+  font-family: Trebuchet MS;
+  font-size: 1.5em;
+  color: black;
+  text-align: left;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

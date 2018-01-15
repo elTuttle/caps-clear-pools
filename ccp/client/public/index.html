@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--
+      manifest.json provides metadata used when your web app is added to the
+      homescreen on Android. See https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="load/skin_classic_black.css"/>
+		<script type="text/javascript" src="java/FWDSimple3DCoverflow.js"></script>
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css">
+    <title>React App</title>
+    <script type="text/javascript">
+			var coverflow;
+
+			FWDRLS3DUtils.onReady(function(){
+				coverflow = new FWDSimple3DCoverflow({
+
+					//required settings
+					coverflowHolderDivId:"myDiv",
+					coverflowDataListDivId:"coverflowData",
+					displayType:"responsive",
+					autoScale:"yes",
+					coverflowWidth:1250,
+					coverflowHeight:540,
+					mainFolderPath:"load",
+					skinPath:"skin_black",
+
+					//main settings
+					backgroundColor:"",
+					backgroundImagePath:"./bg.png",
+					backgroundRepeat:"repeat-x",
+					showDisplay2DAlways:"no",
+					coverflowStartPosition:"center",
+					coverflowTopology:"dualsided",
+					coverflowXRotation:0,
+					coverflowYRotation:0,
+					numberOfThumbnailsToDisplayLeftAndRight:"all",
+					infiniteLoop:"no",
+					rightClickContextMenu:"default",
+					useDragAndSwipe:"no",
+					fluidWidthZIndex:1000,
+
+					//thumbnail settings
+					thumbnailWidth:500,
+					thumbnailHeight:300,
+					thumbnailXOffset3D:86,
+					thumbnailXSpace3D:78,
+					thumbnailZOffset3D:200,
+					thumbnailZSpace3D:93,
+					thumbnailYAngle3D:70,
+					thumbnailXOffset2D:20,
+					thumbnailXSpace2D:30,
+					thumbnailHoverOffset:100,
+					thumbnailBorderSize:0,
+					thumbnailBackgroundColor:"#111",
+					thumbnailBorderColor1:"#111",
+					thumbnailBorderColor2:"#111",
+					transparentImages:"no",
+					thumbnailsAlignment:"center",
+					maxNumberOfThumbnailsOnMobile:13,
+					showThumbnailsGradient:"yes",
+					thumbnailGradientColor1:"rgba(0, 0, 0, 0)",
+					thumbnailGradientColor2:"rgba(0, 0, 0, 1)",
+					showText:"yes",
+					textOffset:10,
+					showThumbnailBoxShadow:"yes",
+					thumbnailBoxShadowCss:"0px 2px 2px #111",
+					showTooltip:"no",
+					dynamicTooltip:"yes",
+					showReflection:"yes",
+					reflectionHeight:30,
+					reflectionDistance:0,
+					reflectionOpacity:.4,
+
+					//controls settings
+					slideshowDelay:5000,
+					autoplay:"no",
+					disableNextAndPrevButtonsOnMobile:"no",
+					controlsMaxWidth:650,
+					controlsPosition:"bottom",
+					controlsOffset:10,
+					showLargeNextAndPrevCoverflowButtons:"no",
+					largeNextAndPrevButtonsOffest:20,
+					showNextAndPrevCoverflowButtons:"yes",
+					showSlideshowButton:"yes",
+					showScrollbar:"yes",
+					showBulletsNavigation:"no",
+					bulletsNormalColor:"#333333",
+					bulletsSelectedColor:"#FFFFFF",
+					bulletsNormalRadius:5,
+					bulletsSelectedRadius:8,
+					spaceBetweenBullets:10,
+					bulletsOffset:14,
+					disableScrollbarOnMobile:"yes",
+					enableMouseWheelScroll:"yes",
+					scrollbarHandlerWidth:200,
+					scrollbarTextColorNormal:"#BBB",
+					scrollbarTextColorSelected:"#BBB",
+					addKeyboardSupport:"yes",
+
+					//categories settings
+					showCategoriesMenu:"yes",
+					startAtCategory:1,
+					categoriesMenuMaxWidth:700,
+					categoriesMenuOffset:25,
+					categoryColorNormal:"#FFF",
+					categoryColorSelected:"#FFF",
+
+					//lightbox settings
+					buttonsAlignment:"in",
+					itemBoxShadow:"none",
+					descriptionWindowAnimationType:"opacity",
+					descriptionWindowPosition:"bottom",
+					slideShowAutoPlay:"no",
+					addKeyboardSupport:"yes",
+					showCloseButton:"yes",
+					showShareButton:"yes",
+					showZoomButton:"yes",
+					showSlideShowButton:"yes",
+					showSlideShowAnimation:"yes",
+					showNextAndPrevButtons:"yes",
+					showNextAndPrevButtonsOnMobile:"yes",
+					showDescriptionButton:"yes",
+					showDescriptionByDefault:"no",
+					videoShowFullScreenButton:"yes",
+					videoAutoPlay:"yes",
+					nextVideoOrAudioAutoPlay:"yes",
+					videoLoop:"no",
+					audioAutoPlay:"no",
+					audioLoop:"no",
+					backgroundOpacity:.9,
+					descriptionWindowBackgroundOpacity:.95,
+					buttonsHideDelay:3,
+					slideShowDelay:4,
+					defaultItemWidth:640,
+					defaultItemHeight:480,
+					itemOffsetHeight:50,
+					spaceBetweenButtons:1,
+					buttonsOffsetIn:2,
+					buttonsOffsetOut:5,
+					itemBorderSize:0,
+					itemBorderRadius:0,
+					itemBackgroundColor:"#333333",
+					itemBorderColor:"#333333",
+					lightBoxBackgroundColor:"#111",
+					descriptionWindowBackgroundColor:"#FFFFFF",
+					videoPosterBackgroundColor:"#0099FF",
+					videoControllerBackgroundColor:"#111",
+					audioControllerBackgroundColor:"#FFFFFF",
+					timeColor:"#000000"
+				});
+
+				coverflow.addListener(FWDSimple3DCoverflow.IS_API_READY, onApiReady);
+				coverflow.addListener(FWDSimple3DCoverflow.THUMB_CHANGE, onThumbChange);
+				coverflow.addListener(FWDSimple3DCoverflow.CATEGORY_CHANGE, onCategoryChange);
+			});
+
+			function gotoNextCategory()
+			{
+				coverflow.switchCategory(coverflow.getCurrentCategoryId() + 1);
+			}
+
+			function gotoNextThumb()
+			{
+				coverflow.gotoThumb(coverflow.getCurrentThumbId() + 1);
+			}
+
+			function gotoPrevThumb()
+			{
+				coverflow.gotoThumb(coverflow.getCurrentThumbId() - 1);
+			}
+
+			function startStopSlideshow()
+			{
+				if (coverflow.isSlideshowPlaying())
+				{
+					coverflow.stopSlideshow();
+				}
+				else
+				{
+					coverflow.startSlideshow();
+				}
+			}
+
+			function onApiReady()
+			{
+				console.log("api ready");
+			}
+
+			function onThumbChange(ev)
+			{
+				console.log("thumb id: " + ev.id);
+			}
+
+			function onCategoryChange(ev)
+			{
+				console.log("category id: " + ev.id);
+			}
+		</script>
+  </head>
+  <body style="background-image:url(./bg2.png);background-color:#93c5f4;">
+    <noscript>
+      You need to enable JavaScript to run this app.
+    </noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
