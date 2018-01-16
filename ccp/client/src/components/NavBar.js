@@ -26,7 +26,7 @@ class NavBar extends React.Component {
         <br />
         <div className="col-lg-12 navbar-div">
           <div className="col-lg-3">
-            <h2 className="navbar-logo">Cap's Clean Pools</h2>
+            <img src={require("../logo.png")} className="navbar-logo"></img>
           </div>
           <div className="col-lg-1">
             <br />

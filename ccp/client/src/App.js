@@ -66,7 +66,7 @@ class App extends Component {
           </div>
 
           <div className="col-lg-12">
-            <br />
+            <hr />
           </div>
           <div className="col-lg-12 image-carousel">
             <div id="myDiv"></div>
