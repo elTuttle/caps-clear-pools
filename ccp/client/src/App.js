@@ -15,14 +15,15 @@ class App extends Component {
 
     this.state = {
       displayComponet: "",
-      homepageHidden: "inline"
+      homepageHidden: "inline",
+      motto: ""
     }
 
   }
 
   componentWillUpdate(nextProps, nextState) {
     if (nextProps.home === true) {
-      nextState.displayComponet = "",
+      nextState.displayComponet = ""
       nextState.homepageHidden = "inline"
     } else if (nextProps.about === true) {
       nextState.displayComponet = <About />
@@ -43,6 +44,7 @@ class App extends Component {
 
 
   render() {
+
     return (
       <div className="App">
         <div className="col-lg-12">
@@ -59,15 +61,8 @@ class App extends Component {
           <p><strong>(210)-788-3572</strong></p>
         </div>
         <div className="col-lg-9" style={{"display":this.state.homepageHidden}}>
+          <Homepage />
           <br />
-          <div className="col-lg-12 homepage-motto-div">
-            <h2 className="homepage-motto">Here at Cap’s Clear Pools we are dedicated to giving you the most enjoyable time possible
-  owning a pool!</h2>
-          </div>
-
-          <div className="col-lg-12">
-            <hr />
-          </div>
           <div className="col-lg-12 image-carousel">
             <div id="myDiv"></div>
               <ul id="coverflowData"   style={{"display": "none"}}>
