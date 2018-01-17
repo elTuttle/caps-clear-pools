@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :contacts
   resources :services
   resources :about_pages
   resources :home_pages

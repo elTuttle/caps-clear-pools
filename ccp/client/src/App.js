@@ -5,6 +5,7 @@ import NavBar from './components/NavBar'
 import Homepage from './components/Homepage'
 import About from './components/About'
 import Services from './components/Services'
+import Contact from './components/Contact'
 import { connect } from 'react-redux';
 import { SocialIcon } from 'react-social-icons';
 
@@ -51,14 +52,7 @@ class App extends Component {
           <NavBar />
         </div>
         <div className="col-lg-2">
-          <br />
-          <p><strong>Email: </strong></p>
-          <SocialIcon url="mailto:capsclearpools@hotmail.com" />
-          <br />
-          <p><strong>capsclearpools@hotmail.com</strong></p>
-          <br />
-          <p><strong>Call:</strong></p>
-          <p><strong>(210)-788-3572</strong></p>
+          <Contact />
         </div>
         <div className="col-lg-9" style={{"display":this.state.homepageHidden}}>
           <Homepage />
