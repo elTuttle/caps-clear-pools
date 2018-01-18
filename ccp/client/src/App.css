@@ -35,6 +35,12 @@
   border-radius: 6px;
 }
 
+.service-div {
+  background-image: url("./bg.png");
+  border: 1px solid white;
+  border-radius: 6px;
+}
+
 .navbar-text {
   margin-top: 30px;
   font-family: Trebuchet MS;

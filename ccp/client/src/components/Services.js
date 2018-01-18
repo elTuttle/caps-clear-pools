@@ -7,16 +7,96 @@ class Services extends React.Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
-    this.state = { collapse: true };
+    this.state = { collapse: true,
+      services: [],
+      whatWeDoStrings: "",
+      whatYouDoStrings: "",
+      title: "",
+      price: 140
+    };
   }
 
   toggle(event) {
-    this.setState({ collapse: !this.state.collapse });
+    this.setState({
+    collapse: false,
+    title: event.target.textContent
+    });
+    fetch("http://localhost:3001/services/" + event.target.dataset.id)
+    .then(results => {
+      return results.json();
+    }).then(data => {
+      const weDo = data.service_items.map((currentValue, index) => {
+        if (currentValue.who_int === 1) {
+          return <p style={{"color":"white"}}>{currentValue.value}</p>
+        }
+      })
+      const youDo = data.service_items.map((currentValue, index) => {
+        if (currentValue.who_int === 2) {
+          return <p style={{"color":"white"}}>{currentValue.value}</p>
+        }
+      })
+      this.setState({
+        price: data.price,
+        whatWeDoStrings: weDo,
+        whatYouDoStrings: youDo,
+      })
+    })
+
+    function changeCollapse() {
+      this.setState({
+        collapse: true
+      })
+    }
+
+    var thisChangeCollapse = changeCollapse.bind(this);
+
+    setInterval(function(){
+      thisChangeCollapse();
+    }, 1000)
+
+  }
+
+
+
+  componentWillMount() {
+    fetch("http://localhost:3001/services")
+    .then(results => {
+      return results.json();
+    }).then(data => {
+      this.setState({
+        services: data,
+        title: data[0].title + ":"
+      })
+    })
+    fetch("http://localhost:3001/services/1")
+    .then(results => {
+      return results.json();
+    }).then(data => {
+      const weDo = data.service_items.map((currentValue, index) => {
+        if (currentValue.who_int === 1) {
+          return <p style={{"color":"white"}}>{currentValue.value}</p>
+        }
+      })
+      const youDo = data.service_items.map((currentValue, index) => {
+        if (currentValue.who_int === 2) {
+          return <p style={{"color":"white"}}>{currentValue.value}</p>
+        }
+      })
+      this.setState({
+        whatWeDoStrings: weDo,
+        whatYouDoStrings: youDo
+      })
+    })
   }
 
 
   render() {
 
+    const service_buttons = this.state.services.map((currentValue, index) => {
+      return <div className="col-lg-12">
+          <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }} data-id={currentValue.id}>{currentValue.title}:</Button>
+        </div>
+    })
 
     return (
       <div>
@@ -25,29 +105,19 @@ class Services extends React.Component {
         <br />
 
         <div className="col-lg-1">
-          <Button color="primary" onClick={this.toggle} style={{ marginBottom: '1rem' }}>Full-service care:</Button>
+          {service_buttons}
         </div>
-        <div className="col-lg-11">
-          <a href="./capsclearpoolscontract.pdf" download style={{"color":"darkblue"}}><strong>Service Contract PDF</strong></a>
+        <div className="col-lg-2">
+          <br />
         </div>
-        <div className="col-lg-11">
+        <div className="col-lg-8 service-div">
           <Collapse isOpen={this.state.collapse}>
-            <h2><strong>Full-service care:</strong> What we do each week</h2>
-              <p> Brush walls and steps</p>
-              <p> Skim surface</p>
-              <p> Vacuum floor</p>
-              <p> Empty skimmer basket</p>
-              <p> Empty pump basket(s)</p>
-              <p> Empty APC bag/filter</p>
-              <p> Backwash on regular basis</p>
-              <p> Test and adjust your water chemistry</p>
-              <p> Verify pool filtration working properly</p>
-              <p> Report any issues with pool VIA pool recap or phone call</p>
-              <p> We keep your pool looking beautiful all year long</p>
-            <h2><strong>What you do:</strong></h2>
-              <p> Keep water at proper level</p>
-              <p> Have any problems with equipment fixed ASAP</p>
-              <p> Report any issues with the pool to Caps Clear Pools ASAP (equipment/water issues)</p>
+            <h2 ><strong style={{"color":"white"}}>{this.state.title}</strong> </h2>
+            <h3 style={{"color":"white"}}>Starting at ${this.state.price}</h3>
+            <h2 style={{"color":"lightblue"}}>What we do each week:</h2>
+              {this.state.whatWeDoStrings}
+            <h2 style={{"color":"lightblue"}}><strong>What you do:</strong></h2>
+              {this.state.whatYouDoStrings}
           </Collapse>
         </div>
       </div>
