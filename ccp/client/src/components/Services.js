@@ -52,7 +52,7 @@ class Services extends React.Component {
 
     setInterval(function(){
       thisChangeCollapse();
-    }, 1000)
+    }, 500)
 
   }
 

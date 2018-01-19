@@ -15,3 +15,9 @@ export const goToServices = () => {
     type: 'SERVICES'
   }
 }
+
+export const goToAdmin = () => {
+  return {
+    type: 'ADMIN'
+  }
+}

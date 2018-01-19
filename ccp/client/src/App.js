@@ -6,7 +6,10 @@ import Homepage from './components/Homepage'
 import About from './components/About'
 import Services from './components/Services'
 import Contact from './components/Contact'
+import Admin from './components/Admin'
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { goToAdmin } from './actions/navbarActions'
 import { SocialIcon } from 'react-social-icons';
 
 class App extends Component {
@@ -32,6 +35,9 @@ class App extends Component {
     } else if (nextProps.services === true) {
       nextState.displayComponet = <Services />
       nextState.homepageHidden = "none"
+    } else if (nextProps.admin === true) {
+      nextState.displayComponet = <Admin />
+      nextState.homepageHidden = "none"
     }
   }
 
@@ -41,6 +47,10 @@ class App extends Component {
     } else {
       return false
     }
+  }
+
+  handleAdminClick = () => {
+    this.props.goToAdmin()
   }
 
 
@@ -109,6 +119,7 @@ class App extends Component {
         <div className="col-lg-1">
           <br />
         </div>
+        <button onClick={this.handleAdminClick}>Admin</button>
       </div>
     );
   }
@@ -119,8 +130,15 @@ const mapStateToProps = (state) => {
   return {
     home: state.home,
     about: state.about,
-    services: state.services
+    services: state.services,
+    admin: state.admin
   }
 };
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    goToAdmin: goToAdmin
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
