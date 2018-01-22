@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180118004703) do
+ActiveRecord::Schema.define(version: 20180120084554) do
 
   create_table "about_pages", force: :cascade do |t|
     t.text "about_1"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 20180118004703) do
     t.text "about_4"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "carousel_images", force: :cascade do |t|
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "home_page_id"
   end
 
   create_table "contacts", force: :cascade do |t|

@@ -26,11 +26,15 @@ class ContactForm extends React.Component {
     const postEmail = this.state.email
     const postPhone = this.state.phone
     const bodyHash = {"email": postEmail, "phone": postPhone}
-    fetch('http://localhost:3001/contacts/1',{
+    fetch('http://ccp-beanstalk-env.myb98kmbra.us-west-1.elasticbeanstalk.com/contacts/1',{
       method: "PATCH",
       body: JSON.stringify(bodyHash),
       headers: {
                   "Content-Type": "application/json"
+      }
+    }).then(results => {
+      if (results.status === 204) {
+        window.location = "/admin/D4vbeqmsYe5rvy8B"
       }
     })
   }
@@ -55,9 +59,17 @@ class ContactForm extends React.Component {
           <h1>Contact:</h1>
           <FormGroup>
             <Label for="email">Email:</Label>
-            <Input type="text" name="emailText" id="email" onChange={this.handleEmailChange} defaultValue={this.state.email}/>
+            <Center>
+              <div className="col-lg-4">
+                <Input type="text" name="emailText" id="email" onChange={this.handleEmailChange} defaultValue={this.state.email}/>
+              </div>
+            </Center>
             <Label for="phone">Phone:</Label>
-            <Input type="text" name="phoneText" id="phone" onChange={this.handlePhoneChange} defaultValue={this.state.phone}/>
+            <Center>
+              <div className="col-lg-4">
+                <Input type="text" name="phoneText" id="phone" onChange={this.handlePhoneChange} defaultValue={this.state.phone}/>
+              </div>
+            </Center>
             <br />
             <Button onClick={this.state.handleSubmit}>Save</Button>
           </FormGroup>

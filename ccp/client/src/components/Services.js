@@ -21,7 +21,7 @@ class Services extends React.Component {
     collapse: false,
     title: event.target.textContent
     });
-    fetch("http://localhost:3001/services/" + event.target.dataset.id)
+    fetch("http://ccp-beanstalk-env.myb98kmbra.us-west-1.elasticbeanstalk.com/services/" + event.target.dataset.id)
     .then(results => {
       return results.json();
     }).then(data => {
@@ -59,7 +59,7 @@ class Services extends React.Component {
 
 
   componentWillMount() {
-    fetch("http://localhost:3001/services")
+    fetch("http://ccp-beanstalk-env.myb98kmbra.us-west-1.elasticbeanstalk.com/services")
     .then(results => {
       return results.json();
     }).then(data => {
@@ -68,7 +68,7 @@ class Services extends React.Component {
         title: data[0].title + ":"
       })
     })
-    fetch("http://localhost:3001/services/1")
+    fetch("http://ccp-beanstalk-env.myb98kmbra.us-west-1.elasticbeanstalk.com/services/1")
     .then(results => {
       return results.json();
     }).then(data => {

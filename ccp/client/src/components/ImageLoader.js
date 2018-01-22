@@ -2,14 +2,14 @@ import React from 'react';
 import Center from 'react-center'
 import ImageCarousel from './ImageCarousel'
 
-class Homepage extends React.Component {
+class ImageLoader extends React.Component {
 
   constructor() {
     super();
 
     this.state = {
-      motto: "",
-      carousel_images: []
+      carousel_images: [],
+      loaded: false
     }
   }
 
@@ -19,25 +19,20 @@ class Homepage extends React.Component {
       return results.json();
     }).then(data => {
       this.setState({
-        motto: data.motto,
         carousel_images: data.carousel_images
       })
     })
   }
 
-  render() {
+  shouldComponentUpdate(nextProps,nextState) {
+    nextState.loaded = true
+  }
 
-    return (
-      <div>
-        <div className="col-lg-12 homepage-motto-div">
-          <h2 className="homepage-motto">{this.state.motto}</h2>
-          <ImageCarousel imageCarouselImages={this.props.carousel_images}/>
-        </div>
-      </div>
-    )
+  render() {
+      return <ImageCarousel carousel_images={this.state.carousel_images}/>
   }
 
 }
 
 
-export default Homepage;
+export default ImageLoader;

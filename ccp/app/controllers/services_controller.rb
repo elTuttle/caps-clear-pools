@@ -1,12 +1,13 @@
 class ServicesController < ApplicationController
+  skip_before_action :verify_authenticity_token
 
   def index
     @services = Service.all
     render json: @services, include: [:service_items]
   end
 
-  def new
-    
+  def create
+    binding.pry
   end
 
   def show

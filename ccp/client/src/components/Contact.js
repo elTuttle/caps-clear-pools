@@ -14,7 +14,7 @@ class Contact extends React.Component {
   }
 
   componentWillMount() {
-    fetch("http://localhost:3001/contacts/1")
+    fetch("http://ccp-beanstalk-env.myb98kmbra.us-west-1.elasticbeanstalk.com/contacts/1")
     .then(results => {
       return results.json();
     }).then(data => {
@@ -31,7 +31,7 @@ class Contact extends React.Component {
       <div>
         <br />
         <p><strong>Email: </strong></p>
-        <SocialIcon url="mailto:capsclearpools@hotmail.com" />
+        <SocialIcon url={"mailto:" + this.state.email} />
         <br />
         <p><strong>{this.state.email}</strong></p>
         <br />

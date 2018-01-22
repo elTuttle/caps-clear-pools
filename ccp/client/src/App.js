@@ -7,10 +7,20 @@ import About from './components/About'
 import Services from './components/Services'
 import Contact from './components/Contact'
 import Admin from './components/Admin'
+import ImageCarousel from './components/ImageCarousel'
+import ImageLoader from './components/ImageLoader'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { goToAdmin } from './actions/navbarActions'
 import { SocialIcon } from 'react-social-icons';
+import {
+  Switch,
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
+import Loader from 'react-loader';
+
+var carousel_images = []
 
 class App extends Component {
 
@@ -20,7 +30,8 @@ class App extends Component {
     this.state = {
       displayComponet: "",
       homepageHidden: "inline",
-      motto: ""
+      motto: "",
+      carousel_images: []
     }
 
   }
@@ -53,74 +64,51 @@ class App extends Component {
     this.props.goToAdmin()
   }
 
+ carousel_request = async () => {
+    const response = await fetch("http://ccp-beanstalk-env.myb98kmbra.us-west-1.elasticbeanstalk.com/home_pages/1")
+    const json = await response.json().carousel_images
+  }
+
+  componentWillMount() {
+    fetch("http://ccp-beanstalk-env.myb98kmbra.us-west-1.elasticbeanstalk.com/home_pages/1")
+    .then(results => {
+      return results.json();
+    }).then(data => {
+      this.setState({
+        motto: data.motto,
+        carousel_images: data.carousel_images
+      })
+    })
+  }
+
 
   render() {
 
+    const carousel_images = this.carousel_request();
+
     return (
-      <div className="App">
-        <div className="col-lg-12">
-          <NavBar />
-        </div>
-        <div className="col-lg-2">
-          <Contact />
-        </div>
-        <div className="col-lg-9" style={{"display":this.state.homepageHidden}}>
-          <Homepage />
-          <br />
-          <div className="col-lg-12 image-carousel">
-            <div id="myDiv"></div>
-              <ul id="coverflowData"   style={{"display": "none"}}>
-
-              <ul className="category-header" data-cat=" ">
-                <ul>
-                  <li data-url="./images/pool1.jpg" data-width="1000" data-height="550"></li>
-                  <li data-thumbnail-path="./images/pool1.jpg"></li>
-                  <li data-thumbnail-text=""></li>
-                  <li data-info=""></li>
-                </ul>
-                <ul>
-                  <li data-url="./images/pool2.jpg" data-width="1000" data-height="550"></li>
-                  <li data-thumbnail-path="./images/pool2.jpg"></li>
-                  <li data-thumbnail-text=""></li>
-                  <li data-info=""></li>
-                </ul>
-                <ul>
-                  <li data-url="./images/pool3.jpg" data-width="1000" data-height="550"></li>
-                  <li data-thumbnail-path="./images/pool3.jpg"></li>
-                  <li data-thumbnail-text=""></li>
-                  <li data-info=""></li>
-                </ul>
-                <ul>
-                  <li data-url="./images/pool4.jpg" data-width="1000" data-height="550"></li>
-                  <li data-thumbnail-path="./images/pool4.jpg"></li>
-                  <li data-thumbnail-text=""></li>
-                  <li data-info=""></li>
-                </ul>
-                <ul>
-                  <li data-url="./images/pool5.jpg" data-width="1000" data-height="550"></li>
-                  <li data-thumbnail-path="./images/pool5.jpg"></li>
-                  <li data-thumbnail-text=""></li>
-                  <li data-info=""></li>
-                </ul>
-                <ul>
-                  <li data-url="./images/pool6.jpg" data-width="1000" data-height="550"></li>
-                  <li data-thumbnail-path="./images/pool6.jpg"></li>
-                  <li data-thumbnail-text=""></li>
-                  <li data-info=""></li>
-                </ul>
-              </ul>
-
-            </ul>
+      <Router >
+        <div className="App">
+          <Switch>
+            <Route exact path="/admin/D4vbeqmsYe5rvy8B" component={Admin} />
+          </Switch>
+          <div className="col-lg-12">
+            <NavBar />
+          </div>
+          <div className="col-lg-2">
+            <Contact />
+          </div>
+          <div className="col-lg-9" style={{"display":this.state.homepageHidden}}>
+            <Homepage carouselImages={this.state.carousel_images}/>
+          </div>
+          <div className="col-lg-9">
+            {this.state.displayComponet}
+          </div>
+          <div className="col-lg-1">
+            <br />
           </div>
         </div>
-        <div className="col-lg-9">
-          {this.state.displayComponet}
-        </div>
-        <div className="col-lg-1">
-          <br />
-        </div>
-        <button onClick={this.handleAdminClick}>Admin</button>
-      </div>
+      </Router>
     );
   }
 }

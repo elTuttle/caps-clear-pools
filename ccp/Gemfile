@@ -22,6 +22,8 @@ gem 'foreman', '~> 0.82.0'
 
 gem 'pry'
 
+gem 'paperclip'
+
 gem 'rack-cors', :require => 'rack/cors'
 
 # Use CoffeeScript for .coffee assets and views

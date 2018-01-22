@@ -15,7 +15,7 @@ class About extends React.Component {
   }
 
   componentWillMount() {
-    fetch("http://localhost:3001/about_pages/1")
+    fetch("http://ccp-beanstalk-env.myb98kmbra.us-west-1.elasticbeanstalk.com/about_pages/1")
     .then(results => {
       return results.json();
     }).then(data => {

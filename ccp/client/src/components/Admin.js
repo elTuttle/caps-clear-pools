@@ -3,7 +3,9 @@ import Center from 'react-center'
 import HomeForm from './HomeForm'
 import ContactForm from './ContactForm'
 import AboutForm from './AboutForm'
+import ServicesForm from './ServicesForm'
 import { Button, ButtonGroup, Form, FormGroup, Label, Input, FormText } from 'reactstrap'
+import FacebookLogin from 'react-facebook-login';
 
 class Admin extends React.Component {
 
@@ -19,12 +21,22 @@ class Admin extends React.Component {
       about_4: "",
       email: "",
       phone: "",
-      services: []
+      services: [],
+      displayDiv: (
+        <FacebookLogin
+           appId="139726450054467"
+           autoLoad={true}
+           fields="name,email,picture"
+           callback={this.responseFacebook}
+           cssClass="my-facebook-button-class"
+           icon="fa-facebook"
+         />
+      )
     }
   }
 
   componentWillMount() {
-    fetch("http://localhost:3001/home_pages/1")
+    fetch("http://ccp-beanstalk-env.myb98kmbra.us-west-1.elasticbeanstalk.com/home_pages/1")
     .then(results => {
       return results.json();
     }).then(data => {
@@ -32,7 +44,7 @@ class Admin extends React.Component {
         motto: data.motto
       })
     })
-    fetch("http://localhost:3001/about_pages/1")
+    fetch("http://ccp-beanstalk-env.myb98kmbra.us-west-1.elasticbeanstalk.com/about_pages/1")
     .then(results => {
       return results.json();
     }).then(data => {
@@ -43,7 +55,7 @@ class Admin extends React.Component {
         about_4: data.about_4
       })
     })
-    fetch("http://localhost:3001/contacts/1")
+    fetch("http://ccp-beanstalk-env.myb98kmbra.us-west-1.elasticbeanstalk.com/contacts/1")
     .then(results => {
       return results.json();
     }).then(data => {
@@ -52,7 +64,7 @@ class Admin extends React.Component {
         phone: data.phone
       })
     })
-    fetch("http://localhost:3001/services")
+    fetch("http://ccp-beanstalk-env.myb98kmbra.us-west-1.elasticbeanstalk.com/services")
     .then(results => {
       return results.json();
     }).then(data => {
@@ -81,58 +93,37 @@ class Admin extends React.Component {
   }
 
   servicesClick = () => {
-    const service_names = this.state.services.map((currentValue, index) => {
-
-      const service_items_we_do = currentValue.service_items.map((currentValue, index) => {
-        if (currentValue.who_int === 1) {
-          return <Input type="text" id={"service_item" + currentValue.id} defaultValue={currentValue.value}/>
-        }
-      })
-
-      const service_items_you_do = currentValue.service_items.map((currentValue, index) => {
-        if (currentValue.who_int === 2) {
-          return <Input type="text" id={"service_item" + currentValue.id} defaultValue={currentValue.value}/>
-        }
-      })
-
-      return <FormGroup>
-                <Label ><strong style={{"fontSize":"2em"}}>{currentValue.title}:</strong></Label>
-                <p>Service Name:</p>
-                <Input type="text" id={"service" + currentValue.id} defaultValue={currentValue.title}/>
-                <p>What We Do:</p>
-                {service_items_we_do}
-                <p>What Customers Do:</p>
-                {service_items_you_do}
-
-             </FormGroup>
-    })
-
     this.setState({
-      currentForm: <Form onSubmit={this.handleServicesSubmit}>
-        <h1>Services:</h1>
-        {service_names}
-        <br />
-        <Input type="submit" value="Save"/>
-        <br />
-      </Form>
+      currentForm: <ServicesForm services={this.state.services} />
     })
+  }
+
+  responseFacebook = (response) => {
+    if(response.email === "thejwt@gmail.com" || response.email === "collin-95@hotmail.com"){
+      this.setState({
+        displayDiv: (
+          <ButtonGroup>
+            <Button onClick={this.homeClick}>Home</Button>
+            <Button onClick={this.contactClick}>Contact</Button>
+            <Button onClick={this.aboutClick}>About</Button>
+          </ButtonGroup>
+        )
+      })
+    }
   }
 
   render() {
 
-
-
-
     return (
       <div>
+        <br />
         <br />
         <ButtonGroup>
           <Button onClick={this.homeClick}>Home</Button>
           <Button onClick={this.contactClick}>Contact</Button>
           <Button onClick={this.aboutClick}>About</Button>
+          <Button onClick={this.servicesClick}>Services</Button>
         </ButtonGroup>
-        <br />
-        <br />
         {this.state.currentForm}
       </div>
     )

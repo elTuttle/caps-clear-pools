@@ -1,5 +1,9 @@
 {
   "name": "ccp",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "react": "^16.2.0",
+    "react-dropzone": "^4.2.7",
+    "superagent": "^3.8.2"
+  }
 }
